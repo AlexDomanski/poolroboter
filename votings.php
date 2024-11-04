@@ -134,7 +134,7 @@ if(count($_POST)>0) {
 			FIDMarke=" . res($_POST["IDMarke"]) . "
 		)
 	";
-	$votings = $conn->query($sql) or die("Fehler in der Query: " . $conn->error . "<br>" . $sql);
+	$votings = dbQuery($conn, $sql);
 	$voting = $votings->fetch_object();
 	if($voting->cnt==0) {
 		//DIESER User hat DIESE Marke noch nicht bewertet --> eintragen
@@ -149,7 +149,7 @@ if(count($_POST)>0) {
 			)
 		";
 		ta($sql);
-		$ok = $conn->query($sql) or die("Fehler in der Query: " . $conn->error . "<br>" . $sql);
+		$ok = dbQuery($conn, $sql);
 		if($ok) {
 			$msg = '<p class="success">Vielen Dank für Ihre Bewertung.</p>';
 		}
