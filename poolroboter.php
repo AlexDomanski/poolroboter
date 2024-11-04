@@ -43,7 +43,7 @@ function nutzungsarten_show(int $idNutzungsart=0):string {
 		FROM tbl_nutzungsarten
 		ORDER BY Nutzungsart ASC
 	";
-	$arten = $conn->query($sql) or die("Fehler in der Query: " . $conn->error . "<br>" . $sql);
+	$arten = dbQuery($conn, $sql);
 	while($art = $arten->fetch_object()) {
 		$sel = $art->IDNutzungsart==$idNutzungsart ? "selected" : "";
 		$r.= '<option value="' . $art->IDNutzungsart . '" ' . $sel . '>' . $art->Nutzungsart . '</option>';
@@ -66,7 +66,7 @@ function poolarten_show(int $idPoolart=0):string {
 		FROM tbl_poolarten
 		ORDER BY Poolart ASC
 	";
-	$arten = $conn->query($sql) or die("Fehler in der Query: " . $conn->error . "<br>" . $sql);
+	$arten = dbQuery($conn, $sql);
 	while($art = $arten->fetch_object()) {
 		$sel = $art->IDPoolart==$idPoolart ? "selected" : "";
 		$r.= '<option value="' . $art->IDPoolart . '" ' . $sel . '>' . $art->Poolart . '</option>';
@@ -162,7 +162,7 @@ else {
 		" . $w . "
 		ORDER BY tbl_marken.Marke ASC, tbl_poolroboter.Poolroboter ASC
 	";
-	$robs = $conn->query($sql) or die("Fehler in der Query: " . $conn->error . "<br>" . $sql);
+	$robs = dbQuery($conn, $sql);
 	while($roboter = $robs->fetch_object()) {
 		echo('
 			<article>
